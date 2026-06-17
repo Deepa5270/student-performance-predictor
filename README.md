@@ -1,20 +1,16 @@
 # 🎓 Student Performance Predictor
 
-An end-to-end Machine Learning web application that predicts a student's **math score** based on various demographic and academic factors. Built with Python, Flask, and CatBoost — deployed on **AWS Elastic Beanstalk** with a CI/CD pipeline using GitHub Actions.
-
----
+An end-to-end Machine Learning web application that predicts a student's math score based on various demographic and academic factors. Built with Python, Flask, and CatBoost — deployed on **Render** with a beautiful modern UI.
 
 ## 📌 Problem Statement
 
 Student performance can be influenced by many factors beyond just studying. This project aims to predict a student's math score using inputs like gender, parental education level, lunch type, and test preparation course — helping educators identify students who may need additional support.
 
----
-
 ## 🚀 Live Demo
 
-> Deployed on AWS Elastic Beanstalk via GitHub Actions CI/CD pipeline.
+🌐 **[Click here to try the app](https://student-performance-predictor-0pqc.onrender.com/predictdata)**
 
----
+> **Note:** The app is hosted on Render's free tier. If it takes a few seconds to load, please wait — it may be waking up from sleep.
 
 ## 🛠️ Tech Stack
 
@@ -24,19 +20,14 @@ Student performance can be influenced by many factors beyond just studying. This
 | Web Framework | Flask |
 | ML Model | CatBoost, Scikit-learn |
 | Data Processing | Pandas, NumPy |
-| Deployment | AWS Elastic Beanstalk |
-| CI/CD | GitHub Actions |
+| Deployment | Render |
 | Frontend | HTML, CSS (Jinja2 Templates) |
-
----
 
 ## 📂 Project Structure
 
 ```
 mlprojects/
 │
-├── .ebextensions/          # AWS Elastic Beanstalk config
-├── .github/workflows/      # GitHub Actions CI/CD pipeline
 ├── artifacts/              # Saved model and preprocessor files
 ├── catboost_info/          # CatBoost training logs
 ├── notebook/               # EDA and model training notebooks
@@ -48,12 +39,11 @@ mlprojects/
 │   └── utils.py            # Utility functions
 ├── templates/              # HTML templates (index, home)
 ├── app.py                  # Flask application entry point
+├── application.py          # Entry point for deployment
 ├── requirements.txt        # Python dependencies
 ├── setup.py                # Package setup
 └── README.md
 ```
-
----
 
 ## 🔍 Features Used for Prediction
 
@@ -67,16 +57,14 @@ mlprojects/
 | Reading Score | Score out of 100 |
 | Writing Score | Score out of 100 |
 
-**Target:** Math Score (regression)
-
----
+**Target: Math Score (regression)**
 
 ## ⚙️ How to Run Locally
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/Deepa5270/mlprojects.git
-cd mlprojects
+git clone https://github.com/Deepa5270/student-performance-predictor.git
+cd student-performance-predictor
 ```
 
 ### 2. Create a virtual environment
@@ -90,45 +78,29 @@ source venv/bin/activate        # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-### 4. Run the Flask app
+### 4. Train the model
+```bash
+set PYTHONPATH=.
+python src/components/data_ingestion.py
+```
+
+### 5. Run the Flask app
 ```bash
 python app.py
 ```
 
-### 5. Open in browser
+### 6. Open in browser
 ```
-http://localhost:5000
+http://localhost:5000/predictdata
 ```
-
----
 
 ## 🧪 Model Training
 
 Training notebooks are available in the `notebook/` folder. The pipeline includes:
 
 - **Data Ingestion** — loads and splits the dataset
-- **Data Transformation** — handles encoding and scaling via `ColumnTransformer`
+- **Data Transformation** — handles encoding and scaling via ColumnTransformer
 - **Model Training** — trains and evaluates multiple regressors, saves the best model
-
-To retrain the model:
-```bash
-python src/pipeline/train_pipeline.py
-```
-
----
-
-## 🚢 Deployment (AWS Elastic Beanstalk)
-
-The app is automatically deployed to AWS EB on every push to the `main` branch using GitHub Actions.
-
-**CI/CD Flow:**
-1. Push to `main`
-2. GitHub Actions triggers the workflow
-3. App is packaged and deployed to AWS Elastic Beanstalk
-
-Configuration is in `.ebextensions/` and `.github/workflows/`.
-
----
 
 ## 📊 Model Performance
 
@@ -136,24 +108,16 @@ Multiple regression models were evaluated. The best performing model was selecte
 
 | Model | R² Score |
 |---|---|
-| CatBoost Regressor | ✅ Best |
+| CatBoost Regressor | ✅ Best (~0.88) |
 | Random Forest | — |
 | Linear Regression | — |
 
-*(Update this table with actual scores after training)*
-
----
-
 ## 📝 License
 
-This project is open source and available under the [MIT License](LICENSE).
-
----
+This project is open source and available under the MIT License.
 
 ## 🙋‍♀️ Author
 
 **Deepa** — [@Deepa5270](https://github.com/Deepa5270)
 
----
-
-> ⭐ If you found this project helpful, please give it a star!
+⭐ If you found this project helpful, please give it a star!
